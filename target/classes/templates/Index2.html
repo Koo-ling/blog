@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../static/backstage/bootstrap2.3.2/css/bootstrap.min.css" th:href="@{/backstage/bootstrap2.3.2/css/bootstrap.min.css}" rel="stylesheet"  />
+    <title></title>
+    <link href="../static/backstage/styles/Common.css" th:href="@{/backstage/styles/Common.css}" rel="stylesheet" />
+    <link href="../static/backstage/styles/Index2.css" th:href="@{/backstage/styles/Index2.css}" rel="stylesheet" />
+    <link href="../static/backstage/styles/index3.css" th:href="@{/backstage/styles/index3.css}" rel="stylesheet" />
+    <script src="../static/backstage/scripts/jquery-1.9.1.min.js" th:src="@{/backstage/scripts/jquery-1.9.1.min.js}"></script>
+    <script src="../static/backstage/bootstrap2.3.2/js/bootstrap.min.js" th:src="@{/backstage/bootstrap2.3.2/js/bootstrap.min.js}"></script>
+    <!--<script src="../static/backstage/layer-v2.3/layer/layer.js"></script>-->
+    <!--<script src="../static/backstage/laypage-v1.3/laypage/laypage.js"></script>-->
+    <script src="../static/backstage/scripts/Index2.js" th:src="@{/backstage/scripts/Index2.js}"></script>
+    <script src="../static/backstage/scripts/Index.js" th:src="@{/backstage/scripts/Index.js}"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <h4>用户列表</h4>
+            <div class="add"><a class="btn btn-success" onclick="openadd();">添加用户</a></div>
+            <div class="w">
+                <div class="span12">
+                    <table class="table table-condensed table-bordered table-hover tab" >
+                        <thead>
+                            <tr>
+                                <th >账户</th>
+                                <th>用户密码</th>
+                                <th>手机号</th>
+                                <th>邮箱</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody" th:each="user:${users}">
+                        <tr>
+                            <th th:text="${user.name}"></th>
+                            <th th:text="${user.password}"></th>
+                            <th th:text="${user.phone}"></th>
+                            <th th:text="${user.email}"></th>
+                            <th>
+                                <form th:action="@{'/admin/delete/'+${user.id}}" style="display:inline-block "><input  type="submit" value="删除" id="sc"/></form>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <!--<form  style="display:inline-block "><input  type="submit" value="修改"  id="xg" onclick="xianshi3()" /></form>-->
+                                <a th:href="@{'/admin/index4/'+${user.id}}" onclick="xianshi3()" style="display:inline-block "><input  type="submit" value="修改"  id="xg"/></a>
+                            </th>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div id="page" class="tr"></div>
+                </div>
+            </div>
+
+
+            <div id="addModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myModalLabel">添加用户</h3>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" th:action="@{/admin/save}">
+                        <div class="control-group">
+                            <label class="control-label" for="userName">姓名</label>
+                            <div class="controls">
+                                <input type="text" name="name" id="userName" placeholder="姓名"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="Chinese">密码</label>
+                            <div class="controls">
+                                <input type="text" name="password" id="Chinese" placeholder="密码"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="Math">手机号</label>
+                            <div class="controls">
+                                <input type="text" name="phone" id="Math" placeholder="手机号"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="English">邮箱</label>
+                            <div class="controls">
+                                <input type="text" name="email" id="English" placeholder="邮箱"/>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                            <button class="btn btn-primary" id="add" onclick="add();">保存</button>
+                            <button class="btn btn-primary" id="edt" onclick="edt();">保存</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

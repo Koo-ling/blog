@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+    >
+    <title>博客系统</title>
+    <link rel="stylesheet" href="/css/reset.css "/>
+    <link rel="stylesheet" href="/css/index.css "/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css "/>
+    <script src="/js/jquery.min.js "></script>
+    <script src="/js/bootstrap.min.js "></script>
+    <script SRC="/js/index.js"></script>
+</head>
+<body>
+<div class="header">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <p class="navbar-text" style="font-size: 25px">博客系统</p>
+                <a  href="/user/myboke" style="font-size: 20px; color: #00aeff" class="navbar-text">我的博客</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="bg-info"><a href="/">首页</a></li>
+                    <li><a href="/boke/getArticles?id=1">专业课</a></li>
+                    <li><a href="/boke/getArticles?id=2">后端开发</a></li>
+                    <li><a href="/boke/getArticles?id=3">算法学习</a></li>
+                    <li><a href="/boke/getArticles?id=4">生活点滴</a></li>
+                    <li><a href="/publish">发表博文</a></li>
+                    <form class="navbar-form navbar-left" th:action="@{/boke/search}">
+                        <div class="form-group">
+                            <input type="text" name="title" class="form-control" placeholder="搜索"/>
+                        </div>
+                        <button type="submit" class="btn btn-default">搜索</button>
+                    </form>
+
+                    <a href="/login" sec:authentication="name" class="navbar-text"></a>
+                    <a href="/admin/backstage" style="margin-top: 5px;">
+                        <input type="submit" class="btn btn-primary" value="后台"/>
+                    </a>
+                    <form th:action="@{/logout}" method="post" style="float:right;margin-top: 5px;"><input type="submit" class="btn btn-primary"  value="注销" /></form>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="public-container">
+    <div class="main-left" id="title">
+
+        <ul class="list-group">
+            <li class="list-group-item" th:each="article:${articles}">
+                <h2 th:text="${article.title}" style="color: #9ea6cc; display:inline-block"></h2>
+
+                <p th:text="${article.content2}">
+                </p>
+                <div style="overflow: hidden ">
+                    <p style="float:right;margin-left: 30px"><a th:href="@{'/boke/getArticle/'+${article.id}}">更多</a>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

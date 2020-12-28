@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>没有权限</title>
+    </head>
+    <body>
+    <div class="warning" style="position: absolute;top:25%;left:40%">
+        <h1 th:inline="text" style="color:#00b4ef">抱歉!</h1>
+        <h2 style="color:red"><b>您没有访问该页面的权限</b></h2>
+        <h3 style="color:#00b4ef ">点击返回<a href="/" style="text-decoration: none">首页</a></h3>
+    </div>
+    </body>
+</html>

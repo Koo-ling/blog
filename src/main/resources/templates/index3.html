@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../static/backstage/bootstrap2.3.2/css/bootstrap.min.css" th:href="@{/backstage/bootstrap2.3.2/css/bootstrap.min.css}" rel="stylesheet" />
+    <title></title>
+    <link href="../static/backstage/styles/Common.css" th:href="@{/backstage/styles/Common.css}" rel="stylesheet" />
+    <link href="../static/backstage/styles/Index2.css" th:href="@{/backstage/styles/Index2.css}" rel="stylesheet" />
+    <link href="../static/backstage/styles/index3.css" th:href="@{/backstage/styles/index3.css}" rel="stylesheet" />
+
+    <script src="../static/backstage/scripts/jquery-1.9.1.min.js" th:src="@{/backstage/scripts/jquery-1.9.1.min.js}"></script>
+    <script src="../static/backstage/bootstrap2.3.2/js/bootstrap.min.js" th:src="@{/backstage/bootstrap2.3.2/js/bootstrap.min.js}"></script>
+    <!--<script src="../layer-v2.3/layer/layer.js"></script>-->
+    <!--<script src="../laypage-v1.3/laypage/laypage.js"></script>-->
+    <script src="../static/backstage/scripts/Index2.js" th:src="@{/backstage/scripts/Index2.js}"></script>
+    <script src="../static/backstage/scripts/Index.js" th:src="@{/backstage/scripts/Index.js}"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <h1 class="text-center">博文列表</h1>
+            <div class="span12">
+                <table class="table table-condensed table-bordered table-hover tab">
+                    <thead>
+                    <tr>
+                        <th>博文标题</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbody" th:each="article:${articles}">
+                       <th><h4 th:text="${article.title}"></h4></th>
+                       <th>
+                          <form th:action="@{'/admin/boke/delete/'+${article.id}}" style="display:inline-block "> <input type="submit" value="删除" class="sc2"/></form>
+                           &nbsp;&nbsp;&nbsp;&nbsp;
+                          <a th:href="@{'/admin/boke/top/'+${article.id}}" onclick="tishi()"> <input type="submit" value="置顶" class="zd"/></a>
+                       </th>
+                    </tbody>
+                </table>
+                <div id="page" class="tr"></div>
+            </div>
+        </div>
+</div>
+</body>
+</html>
